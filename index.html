@@ -2,29 +2,30 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Simulador de Producción - Ingeniería Industrial</title>
+    <title>Simulador de Producción Industrial</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <style>
         body {
-            font-family: Arial, sans-serif;
-            background: #f4f6f9;
             margin: 0;
-            padding: 0;
+            font-family: Arial, Helvetica, sans-serif;
+            background-color: #f2f4f8;
         }
 
         header {
-            background: #003366;
+            background-color: #003366;
             color: white;
             padding: 20px;
             text-align: center;
         }
 
         main {
-            max-width: 600px;
+            max-width: 650px;
             margin: 30px auto;
             background: white;
             padding: 25px;
             border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            box-shadow: 0px 0px 10px rgba(0,0,0,0.1);
         }
 
         h2 {
@@ -33,9 +34,9 @@
         }
 
         label {
+            font-weight: bold;
             display: block;
             margin-top: 15px;
-            font-weight: bold;
         }
 
         input {
@@ -50,7 +51,7 @@
             width: 100%;
             margin-top: 20px;
             padding: 12px;
-            background: #007bff;
+            background-color: #007bff;
             color: white;
             border: none;
             font-size: 16px;
@@ -59,80 +60,84 @@
         }
 
         button:hover {
-            background: #0056b3;
+            background-color: #0056b3;
         }
 
         .resultado {
             margin-top: 25px;
             padding: 15px;
-            background: #e9f5ff;
+            background-color: #e9f3ff;
             border-left: 5px solid #007bff;
         }
 
         footer {
-            text-align: center;
             margin-top: 30px;
+            text-align: center;
             color: gray;
             font-size: 14px;
         }
     </style>
 </head>
+
 <body>
 
 <header>
-    <h1>Simulador de Procesos Industriales</h1>
-    <p>Ingeniería Industrial</p>
+    <h1>Simulador de Producción Industrial</h1>
+    <p>Aplicación Web Interactiva – Ingeniería Industrial</p>
 </header>
 
 <main>
-    <h2>Datos del Proceso</h2>
+    <h2>Datos del Proceso Productivo</h2>
 
-    <label>Producción diaria (unidades):</label>
-    <input type="number" id="produccion">
+    <label for="produccion">Producción diaria (unidades):</label>
+    <input type="number" id="produccion" placeholder="Ej: 500">
 
-    <label>Demanda diaria (unidades):</label>
-    <input type="number" id="demanda">
+    <label for="demanda">Demanda diaria (unidades):</label>
+    <input type="number" id="demanda" placeholder="Ej: 450">
 
-    <label>Inventario inicial (unidades):</label>
-    <input type="number" id="inventario">
+    <label for="inventario">Inventario inicial (unidades):</label>
+    <input type="number" id="inventario" placeholder="Ej: 100">
 
-    <button onclick="simular()">Simular Proceso</button>
+    <button onclick="simularProceso()">Simular proceso</button>
 
     <div class="resultado" id="resultado"></div>
 </main>
 
 <footer>
-    Aplicación académica – Ingeniería Industrial
+    Proyecto académico – Estudiante de Ingeniería Industrial
 </footer>
 
 <script>
-    function simular() {
+    function simularProceso() {
         let produccion = parseInt(document.getElementById("produccion").value);
         let demanda = parseInt(document.getElementById("demanda").value);
         let inventarioInicial = parseInt(document.getElementById("inventario").value);
 
         if (isNaN(produccion) || isNaN(demanda) || isNaN(inventarioInicial)) {
-            alert("Por favor ingrese todos los valores.");
+            alert("Por favor, ingrese todos los valores correctamente.");
             return;
         }
 
         let inventarioFinal = inventarioInicial + produccion - demanda;
-        let mensaje = "";
+        let analisis = "";
 
         if (inventarioFinal > 0) {
-            mensaje = "Exceso de inventario. Se recomienda reducir producción.";
+            analisis = "Existe exceso de inventario. Se recomienda reducir la producción.";
         } else if (inventarioFinal < 0) {
-            mensaje = "Déficit de inventario. Se recomienda aumentar producción.";
+            analisis = "Existe déficit de inventario. Se recomienda aumentar la producción.";
         } else {
-            mensaje = "Producción óptima. Inventario equilibrado.";
+            analisis = "La producción es óptima. El inventario está equilibrado.";
         }
 
         document.getElementById("resultado").innerHTML = `
-            <strong>Inventario Final:</strong> ${inventarioFinal} unidades <br><br>
-            <strong>Análisis:</strong> ${mensaje}
+            <strong>Inventario final:</strong> ${inventarioFinal} unidades<br><br>
+            <strong>Análisis del proceso:</strong> ${analisis}
         `;
     }
 </script>
 
 </body>
 </html>
+
+
+     
